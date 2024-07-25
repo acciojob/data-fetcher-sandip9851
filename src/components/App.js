@@ -12,12 +12,14 @@ const App = () => {
     const fetchData = async () => {
       try {
         const response = await axios(api);
-        setOutput(response.data);
+        setTimeout(() => {
+          setOutput(response.data);
+          setFetching(false);
+        }, 4000);
+       
       } catch (error) {
         setError('No data found');
-      } finally {
-        setFetching(false);
-      }
+      } 
     };
     fetchData();
   }, []);
