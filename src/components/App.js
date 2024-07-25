@@ -9,10 +9,11 @@ const App = () => {
 
   useEffect(() => {
     const api = "https://dummyjson.com/products";
-    const fetchData = async () => {
+    const fetchData =  () => {
       try {
-        const response = await axios(api);
-        setTimeout(() => {
+       
+        setTimeout(async() => {
+          const response = await axios(api);
           setOutput(response.data);
           setFetching(false);
         }, 4000);
