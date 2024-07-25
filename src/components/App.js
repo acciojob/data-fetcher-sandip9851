@@ -9,17 +9,14 @@ const App = () => {
 
   useEffect(() => {
     const api = "https://dummyjson.com/products";
-    const fetchData =  () => {
+    const fetchData =  async () => {
       try {
-       
-        setTimeout(async() => {
-          const response = await axios(api);
-          setOutput(response.data);
-          setFetching(false);
-        }, 4000);
-       
+        const response = await axios(api);
+        setOutput(response.data);
+        setFetching(false);
       } catch (error) {
         setError('No data found');
+        setFetching(false);
       } 
     };
     fetchData();
