@@ -16,12 +16,13 @@ const App = () => {
           if (response.data && response.data.products && response.data.products.length > 0) {
             setOutput(response.data.products);
           } else {
+            setOutput([]);
             setError('No data found');
           }
+          setFetching(false);
         }, 4000);
-      } catch (error) {
-        setError('An error occurred: ' + error.message);
-      } finally {
+      } catch (err) {
+        setError(`An error occurred: ${err.message}`);
         setFetching(false);
       }
     };
@@ -30,7 +31,7 @@ const App = () => {
 
   return (
     <div>
-      <u>Output : </u>
+      <u>Output:</u>
       {fetching ? (
         <p>Loading...</p>
       ) : error ? (
