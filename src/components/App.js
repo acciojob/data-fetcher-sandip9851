@@ -3,35 +3,31 @@ import axios from "axios";
 import 'regenerator-runtime/runtime';
 
 const App = () => {
-  const [output, setOutput] = useState(null);
+  const [output, setOutput] = useState();
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const api = "https://dummyjson.com/products";
-    const fetchData = async () => {
+    const fetchData =  () => {
       try {
-        setTimeout(async () => {
-          const response = await axios.get(api);
-          if (response.data && response.data.products && response.data.products.length > 0) {
-            setOutput(response.data.products);
-          } else {
-            setOutput([]);
-            setError('No data found');
-          }
+       
+        setTimeout(async() => {
+          const response = await axios(api);
+          setOutput(response.data);
           setFetching(false);
         }, 4000);
-      } catch (err) {
-        setError(`An error occurred: ${err.message}`);
-        setFetching(false);
-      }
+       
+      } catch (error) {
+        setError('No data found');
+      } 
     };
     fetchData();
   }, []);
 
   return (
     <div>
-      <u>Output:</u>
+      <u>Output : </u>
       {fetching ? (
         <p>Loading...</p>
       ) : error ? (
