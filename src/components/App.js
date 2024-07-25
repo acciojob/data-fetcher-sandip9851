@@ -15,9 +15,9 @@ const App = () => {
         setOutput(response.data);
         setFetching(false);
       } catch (error) {
-        setError('No data found');
+        setError(`An error occurred: ${error.message}`);
         setFetching(false);
-      } 
+    }
     };
     fetchData();
   }, []);
